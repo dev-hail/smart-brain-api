@@ -1,6 +1,6 @@
 const handleImage = (req, res, db) => {
 	const { id } = req.body;
-	  db('users').where('id', '=', id)
+	  db('user1').where('id', '=', id)
 	  .increment('entries', 1)
 	  .returning('entries')
 	  .then(entries => {

@@ -8,7 +8,7 @@ const handleSignin = (req, res, bcrypt, db) => {
 			.then(data => {
 				const isValid = bcrypt.compareSync(password, data[0].hash);
 				if (isValid) {
-					return db.select('*').from('users')
+					return db.select('*').from('user1')
 					.where('email', '=', email)
 					.then(user => {
 						res.json(user[0])

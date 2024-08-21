@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors')
 const knex = require('knex')
-
 const register = require('./Controllers/register.js')
 const signin = require('./Controllers/signin.js')
 const profile = require('./Controllers/profile.js')
@@ -12,7 +11,7 @@ const image = require('./Controllers/image.js')
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString : process.env.DATABASE_URL ,
+    connectionString : process.env.POSTGRES_URL ,
     ssl: {
     rejectUnauthorized: false
   }

@@ -13,21 +13,28 @@ const handleRegister = (req, res, bcrypt, db) => {
 			.into('login')
 			.returning('email')
 			.then(loginEmail => {
-				return trx('users')
+				return trx('user1')
 					.returning('*')
 					.insert({
 						email: email,
 						name: name,
 						joined: new Date()
 					})
-						.then(user => {
-							res.json(user[0]);
-						})
+					.then(user => {
+						res.json(user[0]);
+					})
 					})
 					.then(trx.commit)
-					.catch(trx.rollback)
-				})
-				.catch(err => res.status(400).json("unable to register"))
+					.catch(err => {
+						console.error('Transaction error:', err);
+						trx.rollback();
+						res.status(400).json("unable to register");
+					  });
+					})
+					.catch(err => {
+					  console.error('Database error:', err); 
+					  res.status(400).json("unable to register");
+					});
 }
 
 module.exports = {
