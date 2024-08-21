@@ -7,7 +7,6 @@ const register = require('./Controllers/register.js')
 const signin = require('./Controllers/signin.js')
 const profile = require('./Controllers/profile.js')
 const image = require('./Controllers/image.js')
-require('dotenv').config();
 const db = knex({
   client: 'pg',
   connection: {
